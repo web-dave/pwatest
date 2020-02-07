@@ -1,0 +1,105 @@
+<button type="button" class="btn btn-outline-dark" (click)="addToHomeScreen();">Add To Home screen</button>
+
+<p>You can do filter table data, in this case with observables and our <code>NgbHighlight</code> component used in Typeahead</p>
+
+<form>
+  <div class="form-group form-inline">
+      Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Country</th>
+    <th scope="col">Area</th>
+    <th scope="col">Population</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let country of countries$ | async; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+      <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
+    </td>
+    <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
+    <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
+  </tr>
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-outline-primary">Primary Button</button>
+<button type="button" class="btn btn-outline-secondary">Secondary Button</button>
+<button type="button" class="btn btn-outline-success">Success Button</button>
+<button type="button" class="btn btn-outline-danger">Danger Button</button>
+<button type="button" class="btn btn-outline-warning">Warning Button</button>
+<button type="button" class="btn btn-outline-info">Info Button</button>
+<button type="button" class="btn btn-outline-light">Light Button</button>
+<button type="button" class="btn btn-outline-dark">Dark Button</button>
+
+<div class="card-columns" style="margin-top: 3rem;">
+  <div class="card">
+    <img src="https://via.placeholder.com/150x50" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title that wraps to a new line :P</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+  </div>
+  <div class="card p-3">
+    <blockquote class="blockquote mb-0 card-body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+      <footer class="blockquote-footer">
+        <small class="text-muted">
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </small>
+      </footer>
+    </blockquote>
+  </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/150x50" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card bg-primary text-white text-center p-3">
+    <blockquote class="blockquote mb-0">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+      <footer class="blockquote-footer text-white">
+        <small>
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </small>
+      </footer>
+    </blockquote>
+  </div>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This card has a regular title and short paragraphy of text below it.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/150x50" class="card-img-top" alt="...">
+  </div>
+  <div class="card p-3 text-right">
+    <blockquote class="blockquote mb-0">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+      <footer class="blockquote-footer">
+        <small class="text-muted">
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </small>
+      </footer>
+    </blockquote>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div>
