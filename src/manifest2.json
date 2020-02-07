@@ -1,0 +1,15 @@
+{
+  "name": "pwatest",
+  "short_name": "pwatest",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+            "src": "assets/icons/frog-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pwatest</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/icons/coffee.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <!-- <link rel="manifest" href="manifest.json"> -->
+  <meta name="theme-color" content="#1976d2">
+
+  <script>
+  var test = false;
+
+  var myDynamicManifest = {
+    "name": "pwatest",
+    "short_name": "pwatest",
+    "theme_color": "#1976d2",
+    "background_color": "#fafafa",
+    "display": "standalone",
+    "start_url": "/",
+    "icons": []
+  }
+
+  if(test){
+    myDynamicManifest['icons'].push({
+            "src": "assets/icons/coffee-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+    });
+  }else{
+    myDynamicManifest['icons'].push({
+            "src": "assets/icons/frog-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+    });
+  }
+
+  console.log(myDynamicManifest);
+  var stringManifest = JSON.stringify(myDynamicManifest);
+  var blob = new Blob([stringManifest], {type: 'application/json'});
+  var manifestURL = URL.createObjectURL(blob);
+
+  if(test){
+    var link = document.createElement('link');
+    link.href = 'https://liquam-cloud-docs.s3.eu-central-1.amazonaws.com/manifest/manifest.json';
+    link.rel = 'manifest';
+    link.id = 'manifest_tag';
+
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }else{
+    var link = document.createElement('link');
+    link.href = 'https://liquam-cloud-docs.s3.eu-central-1.amazonaws.com/manifest/manifest2.json';
+    link.rel = 'manifest';
+    link.id = 'manifest_tag';
+
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }
+  // var link = document.createElement('link');
+  // link.href = manifestURL;
+  // link.rel = 'manifest';
+  // link.id = 'manifest_tag';
+  //
+  // document.getElementsByTagName('head')[0].appendChild(link);
+  // console.log(document.getElementById('manifest_tag'));
+  </script>
+
+</head>
+<body>
+  <app-root></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+</html>
