@@ -36,8 +36,7 @@ const COUNTRIES: Country[] = [
     flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
     area: 9596960,
     population: 1409517397
-  }
-  ,
+  },
   {
     name: 'Germany',
     flag: 'b/ba/Flag_of_Germany.svg',
@@ -49,9 +48,11 @@ const COUNTRIES: Country[] = [
 function search(text: string, pipe: PipeTransform): Country[] {
   return COUNTRIES.filter(country => {
     const term = text.toLowerCase();
-    return country.name.toLowerCase().includes(term)
-        || pipe.transform(country.area).includes(term)
-        || pipe.transform(country.population).includes(term);
+    return (
+      country.name.toLowerCase().includes(term) ||
+      pipe.transform(country.area).includes(term) ||
+      pipe.transform(country.population).includes(term)
+    );
   });
 }
 
@@ -70,13 +71,21 @@ export class AppComponent {
   deferredPrompt: any;
   showButton = false;
 
-
-
-  constructor(pipe: DecimalPipe) {
+  constructor() {
     this.countries$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => search(text, pipe))
+      startWith('')
+      // map(text => search(text, pipe))
     );
+  }
+
+  manifest() {
+    const link = document.createElement('link');
+    link.href = './assets/manifest.json';
+    link.rel = 'manifest';
+    link.id = 'manifest_tag';
+
+    document.getElementsByTagName('head')[0].appendChild(link);
+    console.log(document.getElementById('manifest_tag'));
   }
 
   @HostListener('window:beforeinstallprompt', ['$event'])
@@ -96,14 +105,13 @@ export class AppComponent {
     // Show the prompt
     this.deferredPrompt.prompt();
     // Wait for the user to respond to the prompt
-    this.deferredPrompt.userChoice
-      .then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-        this.deferredPrompt = null;
-      });
+    this.deferredPrompt.userChoice.then(choiceResult => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      this.deferredPrompt = null;
+    });
   }
 }
